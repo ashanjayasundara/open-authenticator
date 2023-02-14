@@ -1,0 +1,101 @@
+{
+  "name": "open-authenticator",
+  "productName": "Open Authenticator",
+  "version": "0.0.1",
+  "description": "An Electron.js App for 2FA with One-time Password provider.",
+  "private": true,
+  "main": "app/electron/main.js",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.development.js",
+    "dev": "concurrently --success first \"yarn dev-server\" \"cross-env NODE_ENV=development electron .\" -k",
+    "prod-build": "cross-env NODE_ENV=production npx webpack --mode=production --config ./webpack.production.js",
+    "prod": "yarn prod-build && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "yarn prod-build && electron-builder",
+    "dist-mac": "yarn prod-build && electron-builder --mac",
+    "dist-linux": "yarn prod-build && electron-builder --linux",
+    "dist-windows": "yarn prod-build && electron-builder --windows",
+    "dist-all": "yarn prod-build && electron-builder --mac --linux --windows"
+  },
+  "build": {
+    "productName": "Open Authenticator",
+    "appId": "org.totp.open-authenticator",
+    "directories": {
+      "buildResources": "resources"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "snap",
+        "AppImage"
+      ]
+    }
+  },
+  "keywords": [
+    "electron",
+    "security",
+    "template"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-react-jsx": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "csp-html-webpack-plugin": "^4.0.0",
+    "css-loader": "^3.5.3",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.7.0",
+    "electron-debug": "^3.1.0",
+    "electron-devtools-installer": "^3.0.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.10.1",
+    "@material-ui/icons": "^4.9.1",
+    "@reduxjs/toolkit": "^1.3.6",
+    "connected-react-router": "^6.8.0",
+    "crypto-js": "^4.0.0",
+    "easy-redux-undo": "^1.0.1",
+    "i18next": "^19.4.5",
+    "i18next-electron-fs-backend": "^1.3.2",
+    "jssha": "^3.1.0",
+    "lodash": "4.17.15",
+    "lodash.merge": "^4.6.2",
+    "moment": "^2.26.0",
+    "notistack": "^0.9.17",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-i18next": "^11.5.0",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "secure-electron-context-menu": "^1.2.1",
+    "secure-electron-store": "^1.2.0",
+    "uuid": "^8.1.0"
+  }
+}
